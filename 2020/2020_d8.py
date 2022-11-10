@@ -1,3 +1,5 @@
+#Part 2 doesn't work yet
+
 
 with open('input.txt') as f:
     inn = [i.strip('\n') for i in f.readlines()]
