@@ -4,24 +4,16 @@
 with open('input.txt') as f:
     inn = [i.strip('\n') for i in f.readlines()]
 
-def resolve(l, fix=False):
+def resolve(l):
     visited = set()
     ind=0
     accmulator=0
     for i in range(len(l)):
         if ind==len(l): break
-        if ind in visited and not fix: 
+        
+        if ind in visited: 
             print(f'infinite loop, accumulator before repetition = {accmulator}')
-            return accmulator
-            
-        if ind in visited and fix:
-            lastcmd = l[list(visited)[-1]]
-            if 'jmp' in lastcmd:
-               l[list(visited)[-1]] = l[list(visited)[-1]].replace('jmp','nop')
-            else:
-                l[list(visited)[-1]] = l[list(visited)[-1]].replace('nop','jmp')
-            print(l)
-            return resolve(l, True)
+            return 1, accmulator
 
         print(l[ind], visited, ind, accmulator)
         visited.add(ind)
@@ -36,9 +28,18 @@ def resolve(l, fix=False):
         elif cmd=='jmp':
             ind+=int(arg) 
 
-    return accmulator
+    return 0, accmulator
 #part 1
-# print(resolve(inn))
+# print(resolve(inn)[1])
 
 #part 2
-print(resolve(inn, fix=True))
+#replace nop with jmp and jmp with nop for each nop and jmp and check if code is fixed
+fixed=[]
+for i in range(len(inn)):
+	cmd, arg = inn[i].split(' ')
+	if cmd=='jmp':
+		fixed = inn[:i] + [f'nop {arg}'] + inn[i+1:]
+		x,acc = resolve(fixed)
+		if not x:
+			print(acc)
+			break
