@@ -16,9 +16,15 @@ def findmax(l: list):
     for i in range(len(l)):
         summ = sum(l[i])
         if summ>smax: smax, index=summ,i
+    
+    #remove largest element
     l.pop(index)
     return smax
 
+#part1
+print(findmax(nums))
+
+#part2
 s=0
 s+=findmax(nums)+findmax(nums)+findmax(nums)
 print(s)
