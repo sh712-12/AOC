@@ -1,5 +1,7 @@
 with open('input.txt') as f:
+    #separate on empty line
     inn = [i.replace('\n',' ') for i in f.read().split('\n\n')]
+    
     nums =[]
     # print(inn)
     for i in inn:
