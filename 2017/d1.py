@@ -1,4 +1,4 @@
-with open('../input.txt') as f:
+with open('input.txt') as f:
     inn = f.readline()
     inn = [int(i) for i in inn]
 #part 1: 
