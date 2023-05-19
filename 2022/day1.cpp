@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    ifstream input ("input.txt", ifstream::in);
+    ifstream input (argv[1], ifstream::in);
     string val;
     u_int64_t sum = 0;
     vector<u_int64_t> sums;
